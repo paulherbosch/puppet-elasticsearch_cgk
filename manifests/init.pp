@@ -16,6 +16,9 @@ class elasticsearch(
   $service_state = 'running'
 ) {
 
+  anchor { 'elasticsearch::begin': }
+  anchor { 'elasticsearch::end': }
+
   case $version {
     'present', 'latest': { $version_real = $version }
     default:             { fail('Class[elasticsearch]: parameter version must be present or latest') }
@@ -42,9 +45,7 @@ class elasticsearch(
         enable => $enable_real
       }
 
-      Class['elasticsearch::package'] -> Class['elasticsearch::config']
-      Class['elasticsearch::config'] ~> Class['elasticsearch::service']
-      Class['elasticsearch::service'] -> Class['elasticsearch']
+      Anchor['elasticsearch::begin'] -> Class['elasticsearch::package'] -> Class['elasticsearch::config'] ~> Class['elasticsearch::service'] -> Anchor['elasticsearch::end']
     }
     default: {
       fail("Class['elasticsearch']: osfamily ${::osfamily} is not supported")
