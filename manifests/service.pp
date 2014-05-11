@@ -14,8 +14,9 @@ class elasticsearch::service(
   }
 
   service { 'elasticsearch':
-    ensure => $ensure_real,
-    enable => $enable_real
+    ensure    => $ensure_real,
+    enable    => $enable_real,
+    hasstatus => true
   }
 
 }
