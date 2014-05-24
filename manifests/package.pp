@@ -1,12 +1,24 @@
-class elasticsearch::package($version = 'present') {
+class elasticsearch::package(
+  $version = undef,
+  $versionlock = false
+) {
 
-  case $version {
-    'present', 'latest': { $version_real = $version }
-    default:             { fail('Class[elasticsearch::package]: parameter version must be present or latest') }
+  if ! $version {
+    fail('Class[Elasticsearch::Package]: parameter version must be provided')
   }
 
   package { 'elasticsearch' :
-    ensure => $version_real
+    ensure => $version
+  }
+
+  case $versionlock {
+    true: {
+      packagelock { 'elasticsearch': }
+    }
+    false: {
+      packagelock { 'elasticsearch': ensure => absent }
+    }
+    default: { fail('Class[Elasticsearch::Package]: parameter versionlock must be true or false')}
   }
 
 }
