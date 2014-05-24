@@ -11,17 +11,20 @@
 # Sample Usage:
 #
 class elasticsearch(
-  $version = 'present',
+  $version = undef,
+  $versionlock = false,
   $enable = true,
-  $service_state = 'running'
+  $service_state = 'running',
+  $cluster_name = 'elasticsearch',
+  $data_dir = '/data/elasticsearch',
+  $logs_dir = '/data/logs/elasticsearch'
 ) {
 
   anchor { 'elasticsearch::begin': }
   anchor { 'elasticsearch::end': }
 
-  case $version {
-    'present', 'latest': { $version_real = $version }
-    default:             { fail('Class[elasticsearch]: parameter version must be present or latest') }
+  if ! $version {
+    fail('Class[Elasticsearch]: parameter version must be provided')
   }
 
   case $enable {
@@ -37,9 +40,16 @@ class elasticsearch(
   case $::osfamily {
     'RedHat': {
       class { 'elasticsearch::package':
-        version => $version_real
+        version     => $version,
+        versionlock => $versionlock
       }
-      class { 'elasticsearch::config': }
+
+      class { 'elasticsearch::config':
+        cluster_name => $cluster_name,
+        data_dir     => $data_dir,
+        logs_dir     => $logs_dir
+      }
+
       class { 'elasticsearch::service':
         ensure => $service_state_real,
         enable => $enable_real
