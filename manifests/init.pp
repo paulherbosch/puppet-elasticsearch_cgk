@@ -20,6 +20,8 @@ class elasticsearch(
   $logs_dir = '/data/logs/elasticsearch'
 ) {
 
+  include stdlib
+
   anchor { 'elasticsearch::begin': }
   anchor { 'elasticsearch::end': }
 

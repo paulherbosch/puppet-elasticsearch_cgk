@@ -7,5 +7,9 @@ describe 'elasticsearch' do
       :osfamily => 'RedHat'
   } }
 
+  let (:params) { {
+    :version => '1.1.1-1'
+  } }
+
   it { should contain_class 'elasticsearch' }
 end
