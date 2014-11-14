@@ -30,4 +30,9 @@ class elasticsearch::config(
     mode    => '0644'
   }
 
+  file { '/etc/sysconfig/elasticsearch':
+    ensure  => file,
+    content => template("${module_name}/etc/sysconfig/elasticsearch.erb"),
+    mode    => '0644'
+  }
 }

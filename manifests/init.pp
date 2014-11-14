@@ -17,7 +17,9 @@ class elasticsearch(
   $service_state = 'running',
   $cluster_name = 'elasticsearch',
   $data_dir = '/data/elasticsearch',
-  $logs_dir = '/data/logs/elasticsearch'
+  $logs_dir = '/data/logs/elasticsearch',
+  $heap_size = '1g',
+  $mlock = 'false'
 ) {
 
   include stdlib
