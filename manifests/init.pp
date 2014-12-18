@@ -20,6 +20,8 @@ class elasticsearch(
   $logs_dir = '/data/logs/elasticsearch',
   $heap_size = '1g',
   $mlock = 'false'
+  $http_cors_enabled = false,
+  $http_cors_origin = 'http://dummy.tld'
 ) {
 
   include stdlib
