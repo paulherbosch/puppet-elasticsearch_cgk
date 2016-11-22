@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe 'elasticsearch' do
+describe 'elasticsearch_cgk' do
   let (:facts) { {
       :osfamily => 'RedHat'
   } }
@@ -11,5 +11,5 @@ describe 'elasticsearch' do
     :version => '1.1.1-1'
   } }
 
-  it { should contain_class 'elasticsearch' }
+  it { should contain_class 'elasticsearch_cgk' }
 end

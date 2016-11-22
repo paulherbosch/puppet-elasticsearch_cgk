@@ -1,4 +1,4 @@
-# Class: elasticsearch
+# Class: elasticsearch_cgk
 #
 # This module manages elasticsearch
 #
@@ -10,7 +10,7 @@
 #
 # Sample Usage:
 #
-class elasticsearch(
+class elasticsearch_cgk(
   $version = undef,
   $versionlock = false,
   $enable = true,
@@ -26,42 +26,42 @@ class elasticsearch(
 
   include stdlib
 
-  anchor { 'elasticsearch::begin': }
-  anchor { 'elasticsearch::end': }
+  anchor { 'elasticsearch_cgk::begin': }
+  anchor { 'elasticsearch_cgk::end': }
 
   if ! $version {
-    fail('Class[Elasticsearch]: parameter version must be provided')
+    fail('Class[Elasticsearch_cgk]: parameter version must be provided')
   }
 
   case $enable {
     true, false: { $enable_real = $enable }
-    default:     { fail('Class[elasticsearch]: parameter enable must be a boolean') }
+    default:     { fail('Class[elasticsearch_cgk]: parameter enable must be a boolean') }
   }
 
   case $service_state {
     'running', 'stopped': { $service_state_real = $service_state }
-    default:     { fail('Class[elasticsearch]: parameter service_state must be running or stopped') }
+    default:     { fail('Class[elasticsearch_cgk]: parameter service_state must be running or stopped') }
   }
 
   case $::osfamily {
     'RedHat': {
-      class { 'elasticsearch::package':
+      class { 'elasticsearch_cgk::package':
         version     => $version,
         versionlock => $versionlock
       }
 
-      class { 'elasticsearch::config':
+      class { 'elasticsearch_cgk::config':
         cluster_name => $cluster_name,
         data_dir     => $data_dir,
         logs_dir     => $logs_dir
       }
 
-      class { 'elasticsearch::service':
+      class { 'elasticsearch_cgk::service':
         ensure => $service_state_real,
         enable => $enable_real
       }
 
-      Anchor['elasticsearch::begin'] -> Class['elasticsearch::package'] -> Class['elasticsearch::config'] ~> Class['elasticsearch::service'] -> Anchor['elasticsearch::end']
+      Anchor['elasticsearch_cgk::begin'] -> Class['elasticsearch_cgk::package'] -> Class['elasticsearch_cgk::config'] ~> Class['elasticsearch_cgk::service'] -> Anchor['elasticsearch_cgk::end']
     }
     default: {
       fail("Class['elasticsearch']: osfamily ${::osfamily} is not supported")

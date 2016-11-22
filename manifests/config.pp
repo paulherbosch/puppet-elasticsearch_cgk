@@ -1,4 +1,4 @@
-class elasticsearch::config(
+class elasticsearch_cgk::config(
   $cluster_name = 'elasticsearch',
   $data_dir = '/data/elasticsearch',
   $logs_dir = '/data/logs/elasticsearch'
