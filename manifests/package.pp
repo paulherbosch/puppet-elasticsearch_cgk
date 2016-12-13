@@ -1,10 +1,10 @@
-class elasticsearch::package(
+class elasticsearch_cgk::package(
   $version = undef,
   $versionlock = false
 ) {
 
   if ! $version {
-    fail('Class[Elasticsearch::Package]: parameter version must be provided')
+    fail('Class[Elasticsearch_cgk::Package]: parameter version must be provided')
   }
 
   package { 'elasticsearch' :
@@ -18,7 +18,7 @@ class elasticsearch::package(
     false: {
       packagelock { 'elasticsearch': ensure => absent }
     }
-    default: { fail('Class[Elasticsearch::Package]: parameter versionlock must be true or false')}
+    default: { fail('Class[Elasticsearch_cgk::Package]: parameter versionlock must be true or false')}
   }
 
 }

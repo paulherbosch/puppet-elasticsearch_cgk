@@ -1,1 +1,1 @@
-include elasticsearch
+include elasticsearch_cgk
