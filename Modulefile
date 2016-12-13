@@ -1,4 +1,4 @@
-name    'cegeka-elasticsearch'
+name    'cegeka-elasticsearch_cgk'
 version '0.0.1'
 source 'UNKNOWN'
 author 'cegeka'
