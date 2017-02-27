@@ -18,6 +18,8 @@ class elasticsearch_cgk(
   $cluster_name = 'elasticsearch',
   $data_dir = '/data/elasticsearch',
   $logs_dir = '/data/logs/elasticsearch',
+  $number_of_shards = '5',
+  $number_of_replicas = '1',
   $heap_size = '1g',
   $mlock = 'false',
   $http_cors_enabled = false,
@@ -51,9 +53,11 @@ class elasticsearch_cgk(
       }
 
       class { 'elasticsearch_cgk::config':
-        cluster_name => $cluster_name,
-        data_dir     => $data_dir,
-        logs_dir     => $logs_dir
+        cluster_name       => $cluster_name,
+        data_dir           => $data_dir,
+        logs_dir           => $logs_dir,
+        number_of_shards   => $number_of_shards,
+        number_of_replicas => $number_of_replicas
       }
 
       class { 'elasticsearch_cgk::service':
