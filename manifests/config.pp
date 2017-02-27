@@ -1,7 +1,9 @@
 class elasticsearch_cgk::config(
   $cluster_name = 'elasticsearch',
   $data_dir = '/data/elasticsearch',
-  $logs_dir = '/data/logs/elasticsearch'
+  $logs_dir = '/data/logs/elasticsearch',
+  $number_of_shards = '5',
+  $number_of_replicas = '1',
 ) {
 
   file { $data_dir:
