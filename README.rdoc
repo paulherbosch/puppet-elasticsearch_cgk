@@ -1,5 +1,5 @@
 = puppet-elasticsearch module
 
-{<img src='https://codex.cegeka.be/jenkins/job/puppet-elasticsearch/badge/icon' />}[https://codex.cegeka.be/jenkins/job/puppet-elasticsearch/]
+{<img src='https://jenkins-iac.cegeka.be/job/puppet-elasticsearch/badge/icon' />}[https://jenkins-iac.cegeka.be/job/puppet-elasticsearch/]
 
 This is the elasticsearch module.
